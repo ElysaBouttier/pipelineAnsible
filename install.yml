@@ -1,0 +1,24 @@
+---
+- name: "Install ngnix server"
+  hosts: web
+  gather_facts: true
+  become: true
+  
+  tasks:
+   - name: "Install nginx package"
+     apt:
+      name: nginx
+      state: latest
+      update_cache: true
+  
+  - name: "Install git"
+     apt:
+      name: git
+      state: present
+      update_cache: true
+      
+  - name: "Clone git"
+    git:
+      repo: https://github.com/ElysaBouttier/pipelineAnsibleHtml.git
+      version: main
+      dest: /var/www/html/
